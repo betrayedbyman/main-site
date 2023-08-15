@@ -1,0 +1,51 @@
+# site settings
+
+title: Betrayed By Man
+description: Betrayed By Man is a four-piece international band based in Minneapolis, MN.
+taglong: Betrayed By Man is a four-piece international band based in Minneapolis, MN.
+tagshort: BBM
+url: https://betrayedbyman.com
+baseurl: ""
+permalink: pretty
+featuredvideo: uVqK3vHj7eg
+
+
+# author settings
+
+author:
+  name: BBM 
+  email: betrayedbyman@gmail.com
+photo: /assets/jpg/BBMT.png
+# build settings
+
+exclude:
+  - LICENSE
+  - README.md
+
+plugins:
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-paginate-v2
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+whitelist:
+  - jekyll-sitemap
+
+sass:
+  sass_dir: _sass
+  style: compressed
+  sourcemap: never
+
+feed:
+  path: atom.xml
+
+autopages:
+  enabled: false
+
+pagination:
+  enabled: true
+  per_page: 1
+  sort_reverse: true
+  permalink: /:num/
+  title: ":title &middot; Page :num"

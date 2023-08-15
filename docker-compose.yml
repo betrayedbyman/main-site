@@ -1,0 +1,30 @@
+networks:
+  t2_proxy:
+    name: t2_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.90.0/24
+
+services:
+  jekyll:
+    volumes:
+        - './:/srv/jekyll:z'
+    ports:
+        - '4000:4000'
+        - '35729:35729'
+    image: jekyll/jekyll:4.2.0
+    command: jekyll serve --incremental --livereload --force_polling
+    networks:
+      - t2_proxy
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.bbm-rtr.entrypoints=https"
+      - "traefik.http.routers.bbm-rtr.rule=HostHeader(`bbm.loworbit.network`)"
+      ## Middlewares
+      - "traefik.http.routers.bbm-rtr.middlewares=chain-no-auth@file"
+      ## HTTP Services
+      - "traefik.http.routers.bbm-rtr.service=bbm-svc"
+      - "traefik.http.services.bbm-svc.loadbalancer.server.port=4000"
+
